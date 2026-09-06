@@ -1,0 +1,19 @@
+# Local credentials
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated files
+node_modules/
+dist/
+coverage/
+
+# Local webhook data
+data/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+
+# macOS
+.DS_Store

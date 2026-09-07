@@ -105,7 +105,8 @@ export class SqliteEventStore implements EventStore {
 
   insert(event: StoredEvent): boolean {
     const result = this.database
-      .prepare(`
+      .prepare(
+        `
         INSERT INTO webhook_events (
           delivery_id,
           event,
@@ -116,7 +117,8 @@ export class SqliteEventStore implements EventStore {
           timestamp
         ) VALUES (?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(delivery_id, action) DO NOTHING
-      `)
+      `,
+      )
       .run(
         event.id,
         event.event,
@@ -132,7 +134,8 @@ export class SqliteEventStore implements EventStore {
 
   list(limit: number): StoredEvent[] {
     const rows = this.database
-      .prepare(`
+      .prepare(
+        `
         SELECT
           delivery_id,
           event,
@@ -144,7 +147,8 @@ export class SqliteEventStore implements EventStore {
         FROM webhook_events
         ORDER BY timestamp DESC, rowid DESC
         LIMIT ?
-      `)
+      `,
+      )
       .all(limit) as unknown as EventRow[];
 
     return rows.map(toStoredEvent);

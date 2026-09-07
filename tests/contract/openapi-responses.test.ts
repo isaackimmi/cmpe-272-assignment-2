@@ -7,12 +7,7 @@ import type { FastifyInstance } from "fastify";
 import { parse } from "yaml";
 import { afterEach, describe, expect, it } from "vitest";
 import { createApp } from "../../src/app";
-import {
-  authorizationHeaders,
-  githubComment,
-  githubIssue,
-  testConfig,
-} from "../helpers";
+import { authorizationHeaders, githubComment, githubIssue, testConfig } from "../helpers";
 
 interface OpenApiDocument {
   components: {
@@ -20,9 +15,7 @@ interface OpenApiDocument {
   };
 }
 
-const openApi = parse(
-  readFileSync(join(process.cwd(), "openapi.yaml"), "utf8"),
-) as OpenApiDocument;
+const openApi = parse(readFileSync(join(process.cwd(), "openapi.yaml"), "utf8")) as OpenApiDocument;
 const documentId = "https://assignment.test/openapi.yaml";
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 
@@ -104,10 +97,7 @@ describe("OpenAPI response components", () => {
         "content-type": "application/json",
         "x-github-event": "issues",
         "x-github-delivery": "contract-delivery",
-        "x-hub-signature-256": `sha256=${createHmac(
-          "sha256",
-          testConfig.webhookSecret,
-        )
+        "x-hub-signature-256": `sha256=${createHmac("sha256", testConfig.webhookSecret)
           .update(webhookBody)
           .digest("hex")}`,
       },

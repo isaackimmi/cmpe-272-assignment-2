@@ -25,8 +25,8 @@ function requiredEnv(name: string): string {
   return value;
 }
 
-const baseUrl = process.env.LIVE_BASE_URL?.trim() ||
-  `http://127.0.0.1:${process.env.PORT?.trim() || "3000"}`;
+const baseUrl =
+  process.env.LIVE_BASE_URL?.trim() || `http://127.0.0.1:${process.env.PORT?.trim() || "3000"}`;
 
 async function gatewayRequest(path: string, init: RequestInit = {}): Promise<Response> {
   return fetch(`${baseUrl}${path}`, {
@@ -39,9 +39,7 @@ async function gatewayRequest(path: string, init: RequestInit = {}): Promise<Res
   });
 }
 
-async function waitForEvent(
-  matches: (event: StoredEvent) => boolean,
-): Promise<StoredEvent> {
+async function waitForEvent(matches: (event: StoredEvent) => boolean): Promise<StoredEvent> {
   const deadline = Date.now() + 60_000;
 
   while (Date.now() < deadline) {
@@ -51,7 +49,7 @@ async function waitForEvent(
       throw new Error(`GET /events returned ${response.status}`);
     }
 
-    const event = (await response.json() as StoredEvent[]).find(matches);
+    const event = ((await response.json()) as StoredEvent[]).find(matches);
 
     if (event) {
       return event;
@@ -76,7 +74,7 @@ describe("live GitHub webhook delivery", () => {
         }),
       });
       expect(created.status).toBe(201);
-      issueNumber = (await created.json() as IssueResponse).number;
+      issueNumber = ((await created.json()) as IssueResponse).number;
 
       await expect(
         waitForEvent(
@@ -92,7 +90,7 @@ describe("live GitHub webhook delivery", () => {
         body: JSON.stringify({ body: "Webhook integration test comment." }),
       });
       expect(commented.status).toBe(201);
-      const commentId = (await commented.json() as CommentResponse).id;
+      const commentId = ((await commented.json()) as CommentResponse).id;
 
       await expect(
         waitForEvent(

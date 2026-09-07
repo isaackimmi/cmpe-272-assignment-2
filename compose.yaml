@@ -1,0 +1,32 @@
+name: cmpe-272-assignment-2
+
+services:
+  api:
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      EVENTS_DATABASE_PATH: /app/data/events.sqlite
+    ports:
+      - "3000:3000"
+    volumes:
+      - events-data:/app/data
+
+  ngrok:
+    image: ngrok/ngrok:latest
+    command:
+      - http
+      - http://api:3000
+    environment:
+      NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
+    ports:
+      - "4040:4040"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  events-data:

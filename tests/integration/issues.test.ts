@@ -1,22 +1,9 @@
 import type { FastifyInstance } from "fastify";
 import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
-import {
-  afterAll,
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-} from "vitest";
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { createApp } from "../../src/app";
-import {
-  authorizationHeaders,
-  githubComment,
-  githubIssue,
-  testConfig,
-} from "../helpers";
+import { authorizationHeaders, githubComment, githubIssue, testConfig } from "../helpers";
 
 const repositoryUrl = "https://api.github.test/repos/owner/repo";
 const server = setupServer();
@@ -138,9 +125,7 @@ describe("issue and comment routes", () => {
   });
 
   it("reads one issue", async () => {
-    server.use(
-      http.get(`${repositoryUrl}/issues/42`, () => HttpResponse.json(githubIssue)),
-    );
+    server.use(http.get(`${repositoryUrl}/issues/42`, () => HttpResponse.json(githubIssue)));
 
     const response = await app.inject({
       method: "GET",

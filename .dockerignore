@@ -1,0 +1,15 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+node_modules
+dist
+coverage
+data
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+.DS_Store
+npm-debug.log*

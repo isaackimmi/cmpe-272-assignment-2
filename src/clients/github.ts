@@ -160,9 +160,7 @@ export class GitHubClient {
       page: String(query.page),
       per_page: String(query.per_page),
     });
-    const result = await this.request<GitHubComment[]>(
-      `/issues/${number}/comments?${search}`,
-    );
+    const result = await this.request<GitHubComment[]>(`/issues/${number}/comments?${search}`);
     return {
       data: result.data.map(normalizeComment),
       ...(result.link ? { link: result.link } : {}),
@@ -203,11 +201,7 @@ export class GitHubClient {
         throw error;
       }
 
-      throw new AppError(
-        503,
-        "GITHUB_UNAVAILABLE",
-        "GitHub is temporarily unavailable",
-      );
+      throw new AppError(503, "GITHUB_UNAVAILABLE", "GitHub is temporarily unavailable");
     }
 
     const responseText = await response.text();
@@ -235,9 +229,7 @@ export class GitHubClient {
 
     return {
       data: responseBody as T,
-      ...(response.headers.get("link")
-        ? { link: response.headers.get("link") ?? undefined }
-        : {}),
+      ...(response.headers.get("link") ? { link: response.headers.get("link") ?? undefined } : {}),
     };
   }
 
@@ -255,12 +247,7 @@ export class GitHubClient {
     }
 
     if (response.status === 401) {
-      throw new AppError(
-        401,
-        "GITHUB_AUTHENTICATION_FAILED",
-        "GitHub authentication failed",
-        401,
-      );
+      throw new AppError(401, "GITHUB_AUTHENTICATION_FAILED", "GitHub authentication failed", 401);
     }
 
     if (response.status === 403) {
@@ -282,12 +269,7 @@ export class GitHubClient {
     }
 
     if (response.status === 422) {
-      throw new AppError(
-        400,
-        "GITHUB_VALIDATION_FAILED",
-        "GitHub rejected the supplied data",
-        422,
-      );
+      throw new AppError(400, "GITHUB_VALIDATION_FAILED", "GitHub rejected the supplied data", 422);
     }
 
     if (response.status >= 500) {

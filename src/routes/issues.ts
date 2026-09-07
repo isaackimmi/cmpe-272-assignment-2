@@ -30,10 +30,7 @@ interface IssueRouteDependencies {
   authenticate: onRequestHookHandler;
 }
 
-export function issueRoutes({
-  github,
-  authenticate,
-}: IssueRouteDependencies): FastifyPluginAsync {
+export function issueRoutes({ github, authenticate }: IssueRouteDependencies): FastifyPluginAsync {
   return async (app) => {
     app.post<{ Body: CreateIssueInput }>(
       "/issues",
@@ -46,10 +43,7 @@ export function issueRoutes({
       },
       async (request, reply) => {
         const issue = await github.createIssue(request.body);
-        return reply
-          .code(201)
-          .header("location", `/issues/${issue.number}`)
-          .send(issue);
+        return reply.code(201).header("location", `/issues/${issue.number}`).send(issue);
       },
     );
 
@@ -112,10 +106,7 @@ export function issueRoutes({
         },
       },
       async (request, reply) => {
-        const comment = await github.createComment(
-          request.params.number,
-          request.body.body,
-        );
+        const comment = await github.createComment(request.params.number, request.body.body);
         return reply
           .code(201)
           .header("location", comment.url ?? comment.html_url)
@@ -137,10 +128,7 @@ export function issueRoutes({
         },
       },
       async (request, reply) => {
-        const result = await github.listComments(
-          request.params.number,
-          request.query,
-        );
+        const result = await github.listComments(request.params.number, request.query);
 
         if (result.link) {
           reply.header("link", result.link);

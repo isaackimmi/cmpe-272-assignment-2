@@ -25,9 +25,7 @@ function responseFor(error: AppError, requestId: string): ErrorResponse {
     code: error.code,
     message: error.message,
     requestId,
-    ...(error.upstreamStatus === undefined
-      ? {}
-      : { upstreamStatus: error.upstreamStatus }),
+    ...(error.upstreamStatus === undefined ? {} : { upstreamStatus: error.upstreamStatus }),
   };
 }
 

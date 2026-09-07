@@ -136,11 +136,7 @@ describe("live GitHub issue lifecycle", () => {
       expect.objectContaining({ id: createdComment.id, body: commentBody }),
     );
 
-    const listedIssue = await waitForIssueInList(
-      app,
-      authorization,
-      createdIssueNumber,
-    );
+    const listedIssue = await waitForIssueInList(app, authorization, createdIssueNumber);
     expect(listedIssue).toMatchObject({
       number: createdIssueNumber,
       title: editedTitle,

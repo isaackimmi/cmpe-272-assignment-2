@@ -1,15 +1,6 @@
 export const issueSchema = {
   type: "object",
-  required: [
-    "number",
-    "html_url",
-    "state",
-    "title",
-    "body",
-    "labels",
-    "created_at",
-    "updated_at",
-  ],
+  required: ["number", "html_url", "state", "title", "body", "labels", "created_at", "updated_at"],
   properties: {
     number: { type: "integer", minimum: 1 },
     html_url: { type: "string", format: "uri" },

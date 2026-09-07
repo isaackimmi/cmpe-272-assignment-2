@@ -1,20 +1,12 @@
 import { createHmac } from "node:crypto";
 import type { FastifyInstance } from "fastify";
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-} from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { createApp } from "../../src/app";
 import type { EventStore } from "../../src/store/events";
 import { authorizationHeaders, testConfig } from "../helpers";
 
 function signature(body: string): string {
-  return `sha256=${createHmac("sha256", testConfig.webhookSecret)
-    .update(body)
-    .digest("hex")}`;
+  return `sha256=${createHmac("sha256", testConfig.webhookSecret).update(body).digest("hex")}`;
 }
 
 async function deliver(

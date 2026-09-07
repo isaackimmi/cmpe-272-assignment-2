@@ -13,10 +13,7 @@ interface EventRouteDependencies {
   authenticate: onRequestHookHandler;
 }
 
-export function eventRoutes({
-  store,
-  authenticate,
-}: EventRouteDependencies): FastifyPluginAsync {
+export function eventRoutes({ store, authenticate }: EventRouteDependencies): FastifyPluginAsync {
   return async (app) => {
     app.get<{ Querystring: EventQuery }>(
       "/events",
@@ -41,9 +38,7 @@ export function eventRoutes({
               timestamp: event.timestamp,
             };
 
-            return "comment_id" in event
-              ? { ...common, comment_id: event.comment_id }
-              : common;
+            return "comment_id" in event ? { ...common, comment_id: event.comment_id } : common;
           });
         } catch {
           throw new AppError(

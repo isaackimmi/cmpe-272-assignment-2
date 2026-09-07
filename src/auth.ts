@@ -7,8 +7,7 @@ function equalSecret(actual: string, expected: string): boolean {
   const expectedBuffer = Buffer.from(expected);
 
   return (
-    actualBuffer.length === expectedBuffer.length &&
-    timingSafeEqual(actualBuffer, expectedBuffer)
+    actualBuffer.length === expectedBuffer.length && timingSafeEqual(actualBuffer, expectedBuffer)
   );
 }
 
@@ -21,11 +20,7 @@ export function bearerAuthenticator(expectedToken: string): onRequestHookHandler
       : "";
 
     if (!suppliedToken || !equalSecret(suppliedToken, expectedToken)) {
-      throw new AppError(
-        401,
-        "UNAUTHORIZED",
-        "A valid bearer token is required",
-      );
+      throw new AppError(401, "UNAUTHORIZED", "A valid bearer token is required");
     }
   };
 }

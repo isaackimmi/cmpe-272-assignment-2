@@ -19,11 +19,7 @@ function singleHeader(value: string | string[] | undefined): string | undefined 
 }
 
 function invalidWebhook(): AppError {
-  return new AppError(
-    400,
-    "INVALID_WEBHOOK",
-    "The webhook event or action is not supported",
-  );
+  return new AppError(400, "INVALID_WEBHOOK", "The webhook event or action is not supported");
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -36,11 +32,7 @@ function positiveInteger(value: unknown): value is number {
 
 function verifySignature(rawBody: Buffer, signature: string | undefined, secret: string): void {
   if (!signature || !/^sha256=[a-f0-9]{64}$/i.test(signature)) {
-    throw new AppError(
-      401,
-      "INVALID_WEBHOOK_SIGNATURE",
-      "The webhook signature is invalid",
-    );
+    throw new AppError(401, "INVALID_WEBHOOK_SIGNATURE", "The webhook signature is invalid");
   }
 
   const suppliedDigest = Buffer.from(signature.slice("sha256=".length), "hex");
@@ -50,11 +42,7 @@ function verifySignature(rawBody: Buffer, signature: string | undefined, secret:
     suppliedDigest.length !== expectedDigest.length ||
     !timingSafeEqual(suppliedDigest, expectedDigest)
   ) {
-    throw new AppError(
-      401,
-      "INVALID_WEBHOOK_SIGNATURE",
-      "The webhook signature is invalid",
-    );
+    throw new AppError(401, "INVALID_WEBHOOK_SIGNATURE", "The webhook signature is invalid");
   }
 }
 
@@ -160,10 +148,8 @@ export function webhookRoutes({
 }: WebhookDependencies): FastifyPluginAsync {
   return async (app) => {
     app.removeContentTypeParser("application/json");
-    app.addContentTypeParser(
-      "application/json",
-      { parseAs: "buffer" },
-      (_request, body, done) => done(null, body),
+    app.addContentTypeParser("application/json", { parseAs: "buffer" }, (_request, body, done) =>
+      done(null, body),
     );
 
     app.post<{ Body: Buffer }>(

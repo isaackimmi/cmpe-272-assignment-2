@@ -17,3 +17,6 @@ data/
 
 # macOS
 .DS_Store
+
+# screenshots
+/screenshots

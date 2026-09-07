@@ -14,12 +14,8 @@
         "header": [],
         "url": {
           "raw": "{{baseUrl}}/healthz",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "healthz"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["healthz"]
         }
       },
       "response": [
@@ -30,12 +26,8 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/healthz",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "healthz"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["healthz"]
             }
           },
           "status": "OK",
@@ -89,12 +81,8 @@
         "header": [],
         "url": {
           "raw": "{{baseUrl}}/issues?state=all&per_page=2&page=1",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "issues"
-          ],
+          "host": ["{{baseUrl}}"],
+          "path": ["issues"],
           "query": [
             {
               "key": "state",
@@ -119,12 +107,8 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/issues?state=all&per_page=3&page=1",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "issues"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["issues"],
               "query": [
                 {
                   "key": "state",
@@ -180,12 +164,8 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/issues?state=all&per_page=2&page=1",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "issues"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["issues"],
               "query": [
                 {
                   "key": "state",
@@ -277,12 +257,8 @@
         },
         "url": {
           "raw": "{{baseUrl}}/issues",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "issues"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["issues"]
         }
       },
       "response": [
@@ -302,12 +278,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/issues",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "issues"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["issues"]
             }
           },
           "status": "Created",
@@ -374,13 +346,8 @@
         },
         "url": {
           "raw": "{{baseUrl}}/issues/{{issueNumber}}",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "issues",
-            "{{issueNumber}}"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["issues", "{{issueNumber}}"]
         }
       },
       "response": [
@@ -400,13 +367,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/issues/{{issueNumber}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "issues",
-                "{{issueNumber}}"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["issues", "{{issueNumber}}"]
             }
           },
           "status": "OK",
@@ -469,14 +431,8 @@
         },
         "url": {
           "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "issues",
-            "{{issueNumber}}",
-            "comments"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["issues", "{{issueNumber}}", "comments"]
         }
       },
       "response": [
@@ -496,14 +452,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "issues",
-                "{{issueNumber}}",
-                "comments"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["issues", "{{issueNumber}}", "comments"]
             }
           },
           "status": "Created",
@@ -570,14 +520,8 @@
         },
         "url": {
           "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments?page=1&per_page=1",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "issues",
-            "{{issueNumber}}",
-            "comments"
-          ],
+          "host": ["{{baseUrl}}"],
+          "path": ["issues", "{{issueNumber}}", "comments"],
           "query": [
             {
               "key": "page",
@@ -607,14 +551,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments?page=1&per_page=10",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "issues",
-                "{{issueNumber}}",
-                "comments"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["issues", "{{issueNumber}}", "comments"],
               "query": [
                 {
                   "key": "page",
@@ -675,14 +613,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments?page=1&per_page=1",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "issues",
-                "{{issueNumber}}",
-                "comments"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["issues", "{{issueNumber}}", "comments"],
               "query": [
                 {
                   "key": "page",
@@ -759,12 +691,8 @@
         },
         "url": {
           "raw": "{{baseUrl}}/events",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "events"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["events"]
         }
       },
       "response": [
@@ -784,12 +712,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/events?limit=50",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "events"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["events"],
               "query": [
                 {
                   "key": "limit",
@@ -846,12 +770,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/events?limit=50",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "events"
-              ],
+              "host": ["{{baseUrl}}"],
+              "path": ["events"],
               "query": [
                 {
                   "key": "limit",
@@ -908,12 +828,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/events",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "events"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["events"]
             }
           },
           "status": "OK",
@@ -957,9 +873,7 @@
           "listen": "test",
           "script": {
             "type": "text/javascript",
-            "exec": [
-              ""
-            ],
+            "exec": [""],
             "packages": {}
           }
         },
@@ -1004,12 +918,8 @@
         },
         "url": {
           "raw": "{{baseUrl}}/webhook",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "webhook"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["webhook"]
         }
       },
       "response": [
@@ -1038,12 +948,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/webhook",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "webhook"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["webhook"]
             }
           },
           "status": "No Content",
@@ -1098,13 +1004,8 @@
         },
         "url": {
           "raw": "{{baseUrl}}/issues/{{issueNumber}}",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "issues",
-            "{{issueNumber}}"
-          ]
+          "host": ["{{baseUrl}}"],
+          "path": ["issues", "{{issueNumber}}"]
         }
       },
       "response": [
@@ -1124,13 +1025,8 @@
             },
             "url": {
               "raw": "{{baseUrl}}/issues/{{issueNumber}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "issues",
-                "{{issueNumber}}"
-              ]
+              "host": ["{{baseUrl}}"],
+              "path": ["issues", "{{issueNumber}}"]
             }
           },
           "status": "OK",

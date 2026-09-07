@@ -9,11 +9,11 @@
     "build": "tsc -p tsconfig.build.json",
     "start": "node --env-file=.env dist/index.js",
     "lint": "eslint .",
-    "test": "vitest run --project unit --coverage",
+    "test": "vitest run --project unit --project routes --project contract --coverage",
     "test:coverage": "npm test",
-    "check:contract": "redocly lint openapi.yaml",
-    "test:integration": "node --env-file=.env ./node_modules/vitest/vitest.mjs run --project integration",
-    "test:webhook": "node --env-file=.env ./node_modules/vitest/vitest.mjs run --project webhook"
+    "check:contract": "redocly lint openapi.yaml && vitest run --project contract",
+    "test:integration": "node --env-file=.env ./node_modules/vitest/vitest.mjs run --project live-integration",
+    "test:webhook": "node --env-file=.env ./node_modules/vitest/vitest.mjs run --project live-webhook"
   },
   "repository": {
     "type": "git",
@@ -35,12 +35,15 @@
     "@redocly/cli": "2.51.2",
     "@types/node": "24.13.3",
     "@vitest/coverage-v8": "4.1.11",
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
     "eslint": "9.39.5",
     "globals": "17.12.0",
     "msw": "2.15.0",
     "tsx": "4.23.13",
     "typescript": "5.9.3",
     "typescript-eslint": "8.69.0",
-    "vitest": "4.1.11"
+    "vitest": "4.1.11",
+    "yaml": "2.8.1"
   }
 }

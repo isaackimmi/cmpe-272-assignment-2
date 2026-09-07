@@ -1,0 +1,1013 @@
+openapi: 3.1.0
+
+info:
+  title: CMPE 272 Assignment 2 - GitHub Issue Service
+  version: 1.0.0
+  description: A Fastify gateway for GitHub issues, comments, and webhook receipts.
+  license:
+    name: ISC
+    identifier: ISC
+
+tags:
+  - name: Health
+    description: Service liveness and operational health
+  - name: Issues
+    description: Create, inspect, and update GitHub issues
+  - name: Comments
+    description: Create and list issue comments
+  - name: Webhooks
+    description: Receive and verify events sent by GitHub
+  - name: Events
+    description: Inspect stored webhook receipts
+
+paths:
+  /healthz:
+    get:
+      tags: [Health]
+      operationId: getHealth
+      summary: Check whether the process is healthy
+      description: Reports liveness only; it does not check GitHub or SQLite.
+      security: []
+      responses:
+        "200":
+          description: Process is healthy
+          headers:
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+              example:
+                status: ok
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /issues:
+    post:
+      tags: [Issues]
+      operationId: createIssue
+      summary: Create a new GitHub issue
+      description: Creates an issue in the configured GitHub repository.
+      security:
+        # Bearer tokens do not use OAuth scopes, so the scope array is empty.
+        - bearerAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateIssueRequest"
+            example:
+              title: Fix overflow behavior
+              body: Text overflows its container
+              labels: [bug]
+      responses:
+        "201":
+          description: Issue created successfully
+          headers:
+            Location:
+              description: Gateway path for retrieving the created issue
+              schema:
+                type: string
+                pattern: "^/issues/[1-9][0-9]*$"
+              example: /issues/42
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Issue"
+              example:
+                number: 42
+                html_url: https://github.com/OWNER/REPO/issues/42
+                state: open
+                title: Fix overflow behavior
+                body: Text overflows its container
+                labels: [bug]
+                created_at: "2026-09-07T00:00:00Z"
+                updated_at: "2026-09-07T00:00:00Z"
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/GatewayOrGitHubUnauthorized"
+        "403":
+          $ref: "#/components/responses/GitHubForbidden"
+        "404":
+          $ref: "#/components/responses/GitHubNotFound"
+        "429":
+          $ref: "#/components/responses/GitHubRateLimited"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/GitHubUnavailable"
+
+    get:
+      tags: [Issues]
+      operationId: listIssues
+      summary: List GitHub issues
+      description: Preserves GitHub pagination semantics and forwards GitHub's Link header when present.
+      security:
+        - bearerAuthToken: []
+      parameters:
+        - $ref: "#/components/parameters/IssueState"
+        - $ref: "#/components/parameters/Labels"
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PerPage"
+      responses:
+        "200":
+          description: Issues retrieved successfully
+          headers:
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+            Link:
+              $ref: "#/components/headers/PaginationLink"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Issue"
+              example:
+                - number: 42
+                  html_url: https://github.com/OWNER/REPO/issues/42
+                  state: open
+                  title: Fix overflow behavior
+                  body: Text overflows its container
+                  labels: [bug]
+                  created_at: "2026-09-07T00:00:00Z"
+                  updated_at: "2026-09-07T00:00:00Z"
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/GatewayOrGitHubUnauthorized"
+        "403":
+          $ref: "#/components/responses/GitHubForbidden"
+        "404":
+          $ref: "#/components/responses/GitHubNotFound"
+        "429":
+          $ref: "#/components/responses/GitHubRateLimited"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/GitHubUnavailable"
+
+  /issues/{number}:
+    parameters:
+      - $ref: "#/components/parameters/IssueNumber"
+    get:
+      tags: [Issues]
+      operationId: getIssue
+      summary: Get one GitHub issue
+      security:
+        - bearerAuthToken: []
+      responses:
+        "200":
+          description: Issue retrieved successfully
+          headers:
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Issue"
+              example:
+                number: 42
+                html_url: https://github.com/OWNER/REPO/issues/42
+                state: open
+                title: Fix overflow behavior
+                body: Text overflows its container
+                labels: [bug]
+                created_at: "2026-09-07T00:00:00Z"
+                updated_at: "2026-09-07T00:00:00Z"
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/GatewayOrGitHubUnauthorized"
+        "403":
+          $ref: "#/components/responses/GitHubForbidden"
+        "404":
+          $ref: "#/components/responses/GitHubNotFound"
+        "429":
+          $ref: "#/components/responses/GitHubRateLimited"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/GitHubUnavailable"
+
+    patch:
+      tags: [Issues]
+      operationId: updateIssue
+      summary: Update, close, or reopen a GitHub issue
+      security:
+        - bearerAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateIssueRequest"
+            example:
+              title: Fix overflow behavior in the Text component
+              state: closed
+      responses:
+        "200":
+          description: Issue updated successfully
+          headers:
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Issue"
+              example:
+                number: 42
+                html_url: https://github.com/OWNER/REPO/issues/42
+                state: closed
+                title: Fix overflow behavior in the Text component
+                body: Text overflows its container
+                labels: [bug]
+                created_at: "2026-09-07T00:00:00Z"
+                updated_at: "2026-09-07T00:15:00Z"
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/GatewayOrGitHubUnauthorized"
+        "403":
+          $ref: "#/components/responses/GitHubForbidden"
+        "404":
+          $ref: "#/components/responses/GitHubNotFound"
+        "429":
+          $ref: "#/components/responses/GitHubRateLimited"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/GitHubUnavailable"
+
+  /issues/{number}/comments:
+    parameters:
+      - $ref: "#/components/parameters/IssueNumber"
+    post:
+      tags: [Comments]
+      operationId: createIssueComment
+      summary: Add a comment to a GitHub issue
+      security:
+        - bearerAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCommentRequest"
+            example:
+              body: This issue is ready for review.
+      responses:
+        "201":
+          description: Comment created successfully
+          headers:
+            Location:
+              description: GitHub API URL for the created comment
+              schema:
+                type: string
+                format: uri
+              example: https://api.github.com/repos/OWNER/REPO/issues/comments/1
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comment"
+              example:
+                id: 1
+                body: This issue is ready for review.
+                user:
+                  login: octocat
+                  html_url: https://github.com/octocat
+                created_at: "2026-09-07T00:20:00Z"
+                updated_at: "2026-09-07T00:20:00Z"
+                html_url: https://github.com/OWNER/REPO/issues/42#issuecomment-1
+                url: https://api.github.com/repos/OWNER/REPO/issues/comments/1
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/GatewayOrGitHubUnauthorized"
+        "403":
+          $ref: "#/components/responses/GitHubForbidden"
+        "404":
+          $ref: "#/components/responses/GitHubNotFound"
+        "429":
+          $ref: "#/components/responses/GitHubRateLimited"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/GitHubUnavailable"
+
+    get:
+      tags: [Comments]
+      operationId: listIssueComments
+      summary: List comments for a GitHub issue
+      security:
+        - bearerAuthToken: []
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PerPage"
+      responses:
+        "200":
+          description: Comments retrieved successfully
+          headers:
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+            Link:
+              $ref: "#/components/headers/PaginationLink"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Comment"
+              example:
+                - id: 1
+                  body: This issue is ready for review.
+                  user:
+                    login: octocat
+                    html_url: https://github.com/octocat
+                  created_at: "2026-09-07T00:20:00Z"
+                  updated_at: "2026-09-07T00:20:00Z"
+                  html_url: https://github.com/OWNER/REPO/issues/42#issuecomment-1
+                  url: https://api.github.com/repos/OWNER/REPO/issues/comments/1
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/GatewayOrGitHubUnauthorized"
+        "403":
+          $ref: "#/components/responses/GitHubForbidden"
+        "404":
+          $ref: "#/components/responses/GitHubNotFound"
+        "429":
+          $ref: "#/components/responses/GitHubRateLimited"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/GitHubUnavailable"
+
+  /webhook:
+    post:
+      tags: [Webhooks]
+      operationId: receiveGitHubWebhook
+      summary: Receive a GitHub webhook delivery
+      description: >
+        Verifies and stores the delivery. Redeliveries with an existing
+        delivery ID and action pair are acknowledged without another insert.
+      security:
+        - webhookSignature: []
+      parameters:
+        - $ref: "#/components/parameters/WebhookSignature"
+        - $ref: "#/components/parameters/WebhookEventType"
+        - $ref: "#/components/parameters/WebhookDeliveryId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubWebhookPayload"
+            example:
+              action: opened
+              repository:
+                full_name: OWNER/REPO
+              issue:
+                number: 42
+      responses:
+        "204":
+          description: Delivery verified and stored, or an identical delivery was already stored
+          headers:
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+        "400":
+          $ref: "#/components/responses/UnsupportedWebhook"
+        "401":
+          $ref: "#/components/responses/InvalidWebhookSignature"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/StorageUnavailable"
+
+  /events:
+    get:
+      tags: [Events]
+      operationId: listWebhookEvents
+      summary: List stored webhook receipts
+      description: Returns stored events newest first for integration verification and debugging.
+      security:
+        - bearerAuthToken: []
+      parameters:
+        - $ref: "#/components/parameters/EventLimit"
+      responses:
+        "200":
+          description: Stored webhook receipts retrieved successfully
+          headers:
+            X-Request-Id:
+              $ref: "#/components/headers/RequestId"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WebhookEvent"
+              example:
+                - id: delivery-id
+                  event: issues
+                  action: opened
+                  issue_number: 42
+                  timestamp: "2026-09-07T00:00:00Z"
+        "400":
+          $ref: "#/components/responses/InvalidRequest"
+        "401":
+          $ref: "#/components/responses/GatewayUnauthorized"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/StorageUnavailable"
+
+components:
+  securitySchemes:
+    bearerAuthToken:
+      type: http
+      scheme: bearer
+      description: Gateway token supplied through API_AUTH_TOKEN
+    webhookSignature:
+      type: apiKey
+      in: header
+      name: X-Hub-Signature-256
+      description: SHA-256 HMAC generated with the shared WEBHOOK_SECRET
+
+  parameters:
+    IssueNumber:
+      name: number
+      in: path
+      required: true
+      description: Positive GitHub issue number
+      schema:
+        type: integer
+        minimum: 1
+      example: 42
+    IssueState:
+      name: state
+      in: query
+      required: false
+      description: Issue state to include
+      schema:
+        type: string
+        enum: [open, closed, all]
+        default: open
+    Labels:
+      name: labels
+      in: query
+      required: false
+      description: Comma-separated GitHub label names
+      schema:
+        type: string
+      example: bug,help wanted
+    Page:
+      name: page
+      in: query
+      required: false
+      description: One-based results page
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      required: false
+      description: Number of results per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 30
+    EventLimit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of recent receipts to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 50
+    WebhookSignature:
+      name: X-Hub-Signature-256
+      in: header
+      required: true
+      description: SHA-256 HMAC of the exact request body bytes
+      schema:
+        type: string
+        pattern: "^sha256=[A-Fa-f0-9]{64}$"
+      example: sha256=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+    WebhookEventType:
+      name: X-GitHub-Event
+      in: header
+      required: true
+      description: GitHub webhook event type
+      schema:
+        type: string
+        enum: [issues, issue_comment, ping]
+    WebhookDeliveryId:
+      name: X-GitHub-Delivery
+      in: header
+      required: true
+      description: Unique GitHub delivery identifier used for deduplication
+      schema:
+        type: string
+        minLength: 1
+      example: 01234567-89ab-cdef-0123-456789abcdef
+
+  headers:
+    RequestId:
+      description: Identifier used to correlate the response with structured logs
+      schema:
+        type: string
+    PaginationLink:
+      description: GitHub pagination links forwarded unchanged; these URLs point directly to GitHub and require GitHub authentication
+      schema:
+        type: string
+      example: '<https://api.github.com/repositories/1/issues?page=2&per_page=30>; rel="next"'
+    RetryAfter:
+      description: Number of seconds callers should wait before retrying
+      schema:
+        type: integer
+        minimum: 0
+      example: 60
+
+  schemas:
+    Health:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [ok]
+      additionalProperties: false
+
+    CreateIssueRequest:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+        body:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+      additionalProperties: false
+
+    UpdateIssueRequest:
+      type: object
+      minProperties: 1
+      properties:
+        title:
+          type: string
+          minLength: 1
+        body:
+          type: string
+        state:
+          type: string
+          enum: [open, closed]
+      additionalProperties: false
+
+    Issue:
+      type: object
+      required: [number, html_url, state, title, body, labels, created_at, updated_at]
+      properties:
+        number:
+          type: integer
+          minimum: 1
+        html_url:
+          type: string
+          format: uri
+        state:
+          type: string
+          enum: [open, closed]
+        title:
+          type: string
+          minLength: 1
+        body:
+          type: [string, "null"]
+        labels:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      additionalProperties: false
+
+    CreateCommentRequest:
+      type: object
+      required: [body]
+      properties:
+        body:
+          type: string
+          minLength: 1
+      additionalProperties: false
+
+    Comment:
+      type: object
+      required: [id, body, user, created_at, html_url]
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        body:
+          type: string
+        user:
+          type: object
+          description: GitHub user information returned with the comment
+          additionalProperties: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        html_url:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: uri
+      additionalProperties: false
+
+    GitHubWebhookPayload:
+      description: A supported GitHub issues, issue-comment, or ping webhook payload
+      oneOf:
+        - $ref: "#/components/schemas/IssueWebhookPayload"
+        - $ref: "#/components/schemas/IssueCommentWebhookPayload"
+        - $ref: "#/components/schemas/PingWebhookPayload"
+
+    IssueWebhookPayload:
+      type: object
+      required: [action, repository, issue]
+      properties:
+        action:
+          type: string
+          enum: [opened, edited, closed, reopened]
+        repository:
+          type: object
+          required: [full_name]
+          properties:
+            full_name:
+              type: string
+          additionalProperties: true
+        issue:
+          type: object
+          required: [number]
+          properties:
+            number:
+              type: integer
+              minimum: 1
+          additionalProperties: true
+      not:
+        type: object
+        required: [comment]
+        properties:
+          comment: {}
+      additionalProperties: true
+
+    IssueCommentWebhookPayload:
+      type: object
+      required: [action, repository, issue, comment]
+      properties:
+        action:
+          type: string
+          enum: [created, edited, deleted]
+        repository:
+          type: object
+          required: [full_name]
+          properties:
+            full_name:
+              type: string
+          additionalProperties: true
+        issue:
+          type: object
+          required: [number]
+          properties:
+            number:
+              type: integer
+              minimum: 1
+          additionalProperties: true
+        comment:
+          type: object
+          required: [id]
+          properties:
+            id:
+              type: integer
+              minimum: 1
+          additionalProperties: true
+      additionalProperties: true
+
+    PingWebhookPayload:
+      type: object
+      required: [zen, hook_id, repository]
+      properties:
+        zen:
+          type: string
+          minLength: 1
+        hook_id:
+          type: integer
+          minimum: 1
+        repository:
+          type: object
+          required: [full_name]
+          properties:
+            full_name:
+              type: string
+          additionalProperties: true
+      not:
+        type: object
+        required: [action]
+        properties:
+          action: {}
+      additionalProperties: true
+
+    WebhookEvent:
+      description: A normalized webhook receipt stored by the gateway
+      oneOf:
+        - $ref: "#/components/schemas/StoredIssueEvent"
+        - $ref: "#/components/schemas/StoredCommentEvent"
+        - $ref: "#/components/schemas/StoredPingEvent"
+
+    StoredIssueEvent:
+      type: object
+      required: [id, event, action, issue_number, timestamp]
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: GitHub delivery identifier
+        event:
+          type: string
+          const: issues
+        action:
+          type: string
+          enum: [opened, edited, closed, reopened]
+        issue_number:
+          type: integer
+          minimum: 1
+        timestamp:
+          type: string
+          format: date-time
+      additionalProperties: false
+
+    StoredCommentEvent:
+      type: object
+      required: [id, event, action, issue_number, comment_id, timestamp]
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: GitHub delivery identifier
+        event:
+          type: string
+          const: issue_comment
+        action:
+          type: string
+          enum: [created, edited, deleted]
+        issue_number:
+          type: integer
+          minimum: 1
+        comment_id:
+          type: integer
+          minimum: 1
+        timestamp:
+          type: string
+          format: date-time
+      additionalProperties: false
+
+    StoredPingEvent:
+      type: object
+      required: [id, event, action, issue_number, timestamp]
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: GitHub delivery identifier
+        event:
+          type: string
+          const: ping
+        action:
+          type: string
+          const: ping
+        issue_number:
+          type: "null"
+          description: Ping deliveries are not associated with an issue
+        timestamp:
+          type: string
+          format: date-time
+      additionalProperties: false
+
+    Error:
+      type: object
+      required: [code, message, requestId]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        requestId:
+          type: string
+        upstreamStatus:
+          type: integer
+          minimum: 400
+          maximum: 599
+          description: Original HTTP error status returned by GitHub, when applicable
+      additionalProperties: false
+
+  responses:
+    InvalidRequest:
+      description: Request validation failed or GitHub rejected the supplied data
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            invalidRequest:
+              summary: Local request validation failed
+              value:
+                code: INVALID_REQUEST
+                message: Request validation failed
+                requestId: req-1
+            githubValidation:
+              summary: GitHub returned 422 and the gateway mapped it to 400
+              value:
+                code: GITHUB_VALIDATION_FAILED
+                message: GitHub rejected the supplied data
+                requestId: req-1
+                upstreamStatus: 422
+
+    GatewayUnauthorized:
+      description: Gateway bearer token is missing or invalid
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: UNAUTHORIZED
+            message: A valid bearer token is required
+            requestId: req-1
+
+    GatewayOrGitHubUnauthorized:
+      description: Gateway authentication failed or GitHub rejected the server-side credential
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            gatewayAuthentication:
+              summary: Gateway bearer token is missing or invalid
+              value:
+                code: UNAUTHORIZED
+                message: A valid bearer token is required
+                requestId: req-1
+            githubAuthentication:
+              summary: GitHub rejected the server-side token
+              value:
+                code: GITHUB_AUTHENTICATION_FAILED
+                message: GitHub authentication failed
+                requestId: req-1
+                upstreamStatus: 401
+
+    GitHubForbidden:
+      description: GitHub denied access for a reason other than rate limiting
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: GITHUB_FORBIDDEN
+            message: GitHub denied access to the requested resource
+            requestId: req-1
+            upstreamStatus: 403
+
+    GitHubNotFound:
+      description: The configured repository, issue, or comment was not found
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: GITHUB_NOT_FOUND
+            message: The requested GitHub resource was not found
+            requestId: req-1
+            upstreamStatus: 404
+
+    GitHubRateLimited:
+      description: GitHub rate limiting is active and the gateway is cooling down
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+        Retry-After:
+          $ref: "#/components/headers/RetryAfter"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: GITHUB_RATE_LIMITED
+            message: GitHub rate limiting is active; retry later
+            requestId: req-1
+            upstreamStatus: 429
+
+    InternalServerError:
+      description: An unexpected application error occurred
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: INTERNAL_ERROR
+            message: An unexpected error occurred
+            requestId: req-1
+
+    GitHubUnavailable:
+      description: GitHub returned a server error, timed out, or could not be reached
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: GITHUB_UNAVAILABLE
+            message: GitHub is temporarily unavailable
+            requestId: req-1
+            upstreamStatus: 503
+
+    UnsupportedWebhook:
+      description: Webhook payload, event type, action, or repository is invalid or unsupported
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: INVALID_WEBHOOK
+            message: The webhook event or action is not supported
+            requestId: req-1
+
+    InvalidWebhookSignature:
+      description: Webhook signature is missing, malformed, or invalid
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: INVALID_WEBHOOK_SIGNATURE
+            message: The webhook signature is invalid
+            requestId: req-1
+
+    StorageUnavailable:
+      description: The local webhook receipt store is unavailable
+      headers:
+        X-Request-Id:
+          $ref: "#/components/headers/RequestId"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: STORAGE_UNAVAILABLE
+            message: The webhook receipt store is temporarily unavailable
+            requestId: req-1

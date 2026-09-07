@@ -1,0 +1,6 @@
+# /healthz is a parameter-free liveness check, so it has no meaningful
+# client-error (4XX) response. Keep the generic rule enabled for all other
+# operations while documenting this intentional exception here.
+openapi.yaml:
+  operation-4xx-response:
+    - "#/paths/~1healthz/get/responses"

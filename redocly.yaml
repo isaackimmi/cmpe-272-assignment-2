@@ -1,0 +1,7 @@
+# OpenAPI 3.1 allows `servers` to be omitted and defaults its URL to `/`.
+# This config disables Redocly's stricter server requirement for that intentional choice.
+extends:
+  - recommended
+
+rules:
+  no-empty-servers: off

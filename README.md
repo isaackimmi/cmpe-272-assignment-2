@@ -4,6 +4,8 @@ A TypeScript and Fastify gateway for the GitHub Issues API. The service creates,
 updates issues; creates and lists comments; verifies GitHub webhook signatures; and stores
 normalized webhook receipts in SQLite.
 
+Supporting submission materials are included in [Assignment-2-Design-Note.docx](Assignment-2-Design-Note.docx) and [CMPE_272_Assignment_2_Screenshot_Evidence.docx](CMPE_272_Assignment_2_Screenshot_Evidence.docx).
+
 ## Prerequisites
 
 - [HTTPie](https://httpie.io/) for the request examples

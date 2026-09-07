@@ -1,0 +1,1181 @@
+{
+  "info": {
+    "_postman_id": "e24ed280-a727-466d-8028-f4e875e2e9e8",
+    "name": "Assignment 2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "14593663",
+    "_collection_link": "https://go.postman.co/collection/14593663-e24ed280-a727-466d-8028-f4e875e2e9e8?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "/healthz",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/healthz",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "healthz"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "/healthz",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/healthz",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "healthz"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-2n"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "15"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:47:02 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"status\": \"ok\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "List issues",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{apiAuthToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/issues?state=all&per_page=2&page=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "issues"
+          ],
+          "query": [
+            {
+              "key": "state",
+              "value": "all"
+            },
+            {
+              "key": "per_page",
+              "value": "2"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "List issues",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/issues?state=all&per_page=3&page=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "issues"
+              ],
+              "query": [
+                {
+                  "key": "state",
+                  "value": "all"
+                },
+                {
+                  "key": "per_page",
+                  "value": "3"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-2o"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "674"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:47:28 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"number\": 3,\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/3\",\n    \"state\": \"open\",\n    \"title\": \"open issue 3\",\n    \"body\": null,\n    \"labels\": [],\n    \"created_at\": \"2026-09-07T04:38:55Z\",\n    \"updated_at\": \"2026-09-07T05:10:19Z\"\n  },\n  {\n    \"number\": 2,\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/2\",\n    \"state\": \"closed\",\n    \"title\": \"Closed Issue 2\",\n    \"body\": \"hello\",\n    \"labels\": [],\n    \"created_at\": \"2026-09-07T04:11:46Z\",\n    \"updated_at\": \"2026-09-07T05:43:35Z\"\n  },\n  {\n    \"number\": 1,\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/1\",\n    \"state\": \"open\",\n    \"title\": \"Open Issue 1\",\n    \"body\": \"hello\",\n    \"labels\": [],\n    \"created_at\": \"2026-09-07T04:08:22Z\",\n    \"updated_at\": \"2026-09-07T05:40:39Z\"\n  }\n]"
+        },
+        {
+          "name": "List issues",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/issues?state=all&per_page=2&page=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "issues"
+              ],
+              "query": [
+                {
+                  "key": "state",
+                  "value": "all"
+                },
+                {
+                  "key": "per_page",
+                  "value": "2"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-2p"
+            },
+            {
+              "key": "link",
+              "value": "<https://api.github.com/repositories/1359560850/issues?state=all&page=2&per_page=2&after=Y3Vyc29yOnYyOpLPAAABoHoQo9DPAAAAAUASlT8%3D>; rel=\"next\""
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "450"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:47:36 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"number\": 3,\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/3\",\n    \"state\": \"open\",\n    \"title\": \"open issue 3\",\n    \"body\": null,\n    \"labels\": [],\n    \"created_at\": \"2026-09-07T04:38:55Z\",\n    \"updated_at\": \"2026-09-07T05:10:19Z\"\n  },\n  {\n    \"number\": 2,\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/2\",\n    \"state\": \"closed\",\n    \"title\": \"Closed Issue 2\",\n    \"body\": \"hello\",\n    \"labels\": [],\n    \"created_at\": \"2026-09-07T04:11:46Z\",\n    \"updated_at\": \"2026-09-07T05:43:35Z\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Create issue",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Creates an issue\", () => {\n  pm.response.to.have.status(201);\n});\n\nconst issue = pm.response.json();\nif (issue.number) {\n  pm.environment.set(\"issueNumber\", issue.number);\n}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{apiAuthToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Open Issue 4\",\n  \"body\": \"Created through the Fastify GitHub Issues gateway\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/issues",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "issues"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Create issue",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Open Issue 4\",\n  \"body\": \"Created through the Fastify GitHub Issues gateway\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/issues",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "issues"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-2q"
+            },
+            {
+              "key": "location",
+              "value": "/issues/4"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "267"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:47:47 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"number\": 4,\n  \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/4\",\n  \"state\": \"open\",\n  \"title\": \"Open Issue 4\",\n  \"body\": \"Created through the Fastify GitHub Issues gateway\",\n  \"labels\": [],\n  \"created_at\": \"2026-09-07T05:47:47Z\",\n  \"updated_at\": \"2026-09-07T05:47:47Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get issue",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{apiAuthToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/issues/{{issueNumber}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "issues",
+            "{{issueNumber}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Get Issue 1",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/issues/{{issueNumber}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "issues",
+                "{{issueNumber}}"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-2t"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "223"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:48:05 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"number\": 1,\n  \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/1\",\n  \"state\": \"open\",\n  \"title\": \"Open Issue 1\",\n  \"body\": \"hello\",\n  \"labels\": [],\n  \"created_at\": \"2026-09-07T04:08:22Z\",\n  \"updated_at\": \"2026-09-07T05:40:39Z\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create comment",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{apiAuthToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"body\": \"Comment created through Postman\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "issues",
+            "{{issueNumber}}",
+            "comments"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Create Comment 6 in Issue 1",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"Comment created through Postman\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "issues",
+                "{{issueNumber}}",
+                "comments"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-3k"
+            },
+            {
+              "key": "location",
+              "value": "https://api.github.com/repos/isaackimmi/cmpe-272-assignment-2/issues/comments/5565749552"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "1333"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:58:27 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"id\": 5565749552,\n  \"body\": \"Comment created through Postman\",\n  \"user\": {\n    \"login\": \"isaackimmi\",\n    \"id\": 53633984,\n    \"node_id\": \"MDQ6VXNlcjUzNjMzOTg0\",\n    \"avatar_url\": \"https://avatars.githubusercontent.com/u/53633984?u=f8fa68c3ca4d43283a39e6458564d7f51c93bed5&v=4\",\n    \"gravatar_id\": \"\",\n    \"url\": \"https://api.github.com/users/isaackimmi\",\n    \"html_url\": \"https://github.com/isaackimmi\",\n    \"followers_url\": \"https://api.github.com/users/isaackimmi/followers\",\n    \"following_url\": \"https://api.github.com/users/isaackimmi/following{/other_user}\",\n    \"gists_url\": \"https://api.github.com/users/isaackimmi/gists{/gist_id}\",\n    \"starred_url\": \"https://api.github.com/users/isaackimmi/starred{/owner}{/repo}\",\n    \"subscriptions_url\": \"https://api.github.com/users/isaackimmi/subscriptions\",\n    \"organizations_url\": \"https://api.github.com/users/isaackimmi/orgs\",\n    \"repos_url\": \"https://api.github.com/users/isaackimmi/repos\",\n    \"events_url\": \"https://api.github.com/users/isaackimmi/events{/privacy}\",\n    \"received_events_url\": \"https://api.github.com/users/isaackimmi/received_events\",\n    \"type\": \"User\",\n    \"user_view_type\": \"public\",\n    \"site_admin\": false\n  },\n  \"created_at\": \"2026-09-07T05:58:27Z\",\n  \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/1#issuecomment-5565749552\",\n  \"updated_at\": \"2026-09-07T05:58:27Z\",\n  \"url\": \"https://api.github.com/repos/isaackimmi/cmpe-272-assignment-2/issues/comments/5565749552\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "List comments",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{apiAuthToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments?page=1&per_page=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "issues",
+            "{{issueNumber}}",
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "per_page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Issue 1 (5 comments)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments?page=1&per_page=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "issues",
+                "{{issueNumber}}",
+                "comments"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-25"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "6360"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:36:32 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"id\": 5564962248,\n    \"body\": \"this is not a good comment\",\n    \"user\": {\n      \"login\": \"isaackimmi\",\n      \"id\": 53633984,\n      \"node_id\": \"MDQ6VXNlcjUzNjMzOTg0\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/53633984?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/isaackimmi\",\n      \"html_url\": \"https://github.com/isaackimmi\",\n      \"followers_url\": \"https://api.github.com/users/isaackimmi/followers\",\n      \"following_url\": \"https://api.github.com/users/isaackimmi/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/isaackimmi/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/isaackimmi/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/isaackimmi/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/isaackimmi/orgs\",\n      \"repos_url\": \"https://api.github.com/users/isaackimmi/repos\",\n      \"events_url\": \"https://api.github.com/users/isaackimmi/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/isaackimmi/received_events\",\n      \"type\": \"User\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    },\n    \"created_at\": \"2026-09-07T04:19:07Z\",\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/1#issuecomment-5564962248\",\n    \"updated_at\": \"2026-09-07T04:19:07Z\",\n    \"url\": \"https://api.github.com/repos/isaackimmi/cmpe-272-assignment-2/issues/comments/5564962248\"\n  },\n  {\n    \"id\": 5564963179,\n    \"body\": \"comment 3\",\n    \"user\": {\n      \"login\": \"isaackimmi\",\n      \"id\": 53633984,\n      \"node_id\": \"MDQ6VXNlcjUzNjMzOTg0\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/53633984?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/isaackimmi\",\n      \"html_url\": \"https://github.com/isaackimmi\",\n      \"followers_url\": \"https://api.github.com/users/isaackimmi/followers\",\n      \"following_url\": \"https://api.github.com/users/isaackimmi/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/isaackimmi/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/isaackimmi/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/isaackimmi/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/isaackimmi/orgs\",\n      \"repos_url\": \"https://api.github.com/users/isaackimmi/repos\",\n      \"events_url\": \"https://api.github.com/users/isaackimmi/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/isaackimmi/received_events\",\n      \"type\": \"User\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    },\n    \"created_at\": \"2026-09-07T04:19:14Z\",\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/1#issuecomment-5564963179\",\n    \"updated_at\": \"2026-09-07T04:19:14Z\",\n    \"url\": \"https://api.github.com/repos/isaackimmi/cmpe-272-assignment-2/issues/comments/5564963179\"\n  },\n  {\n    \"id\": 5564963606,\n    \"body\": \"comment 4\",\n    \"user\": {\n      \"login\": \"isaackimmi\",\n      \"id\": 53633984,\n      \"node_id\": \"MDQ6VXNlcjUzNjMzOTg0\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/53633984?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/isaackimmi\",\n      \"html_url\": \"https://github.com/isaackimmi\",\n      \"followers_url\": \"https://api.github.com/users/isaackimmi/followers\",\n      \"following_url\": \"https://api.github.com/users/isaackimmi/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/isaackimmi/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/isaackimmi/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/isaackimmi/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/isaackimmi/orgs\",\n      \"repos_url\": \"https://api.github.com/users/isaackimmi/repos\",\n      \"events_url\": \"https://api.github.com/users/isaackimmi/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/isaackimmi/received_events\",\n      \"type\": \"User\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    },\n    \"created_at\": \"2026-09-07T04:19:17Z\",\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/1#issuecomment-5564963606\",\n    \"updated_at\": \"2026-09-07T04:19:17Z\",\n    \"url\": \"https://api.github.com/repos/isaackimmi/cmpe-272-assignment-2/issues/comments/5564963606\"\n  },\n  {\n    \"id\": 5564991119,\n    \"body\": \"no\",\n    \"user\": {\n      \"login\": \"isaackimmi\",\n      \"id\": 53633984,\n      \"node_id\": \"MDQ6VXNlcjUzNjMzOTg0\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/53633984?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/isaackimmi\",\n      \"html_url\": \"https://github.com/isaackimmi\",\n      \"followers_url\": \"https://api.github.com/users/isaackimmi/followers\",\n      \"following_url\": \"https://api.github.com/users/isaackimmi/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/isaackimmi/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/isaackimmi/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/isaackimmi/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/isaackimmi/orgs\",\n      \"repos_url\": \"https://api.github.com/users/isaackimmi/repos\",\n      \"events_url\": \"https://api.github.com/users/isaackimmi/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/isaackimmi/received_events\",\n      \"type\": \"User\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    },\n    \"created_at\": \"2026-09-07T04:22:50Z\",\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/1#issuecomment-5564991119\",\n    \"updated_at\": \"2026-09-07T04:22:50Z\",\n    \"url\": \"https://api.github.com/repos/isaackimmi/cmpe-272-assignment-2/issues/comments/5564991119\"\n  },\n  {\n    \"id\": 5564991600,\n    \"body\": \"more comments\",\n    \"user\": {\n      \"login\": \"isaackimmi\",\n      \"id\": 53633984,\n      \"node_id\": \"MDQ6VXNlcjUzNjMzOTg0\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/53633984?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/isaackimmi\",\n      \"html_url\": \"https://github.com/isaackimmi\",\n      \"followers_url\": \"https://api.github.com/users/isaackimmi/followers\",\n      \"following_url\": \"https://api.github.com/users/isaackimmi/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/isaackimmi/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/isaackimmi/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/isaackimmi/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/isaackimmi/orgs\",\n      \"repos_url\": \"https://api.github.com/users/isaackimmi/repos\",\n      \"events_url\": \"https://api.github.com/users/isaackimmi/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/isaackimmi/received_events\",\n      \"type\": \"User\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    },\n    \"created_at\": \"2026-09-07T04:22:53Z\",\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/1#issuecomment-5564991600\",\n    \"updated_at\": \"2026-09-07T04:22:53Z\",\n    \"url\": \"https://api.github.com/repos/isaackimmi/cmpe-272-assignment-2/issues/comments/5564991600\"\n  }\n]"
+        },
+        {
+          "name": "Issue 1 (1 comment)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/issues/{{issueNumber}}/comments?page=1&per_page=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "issues",
+                "{{issueNumber}}",
+                "comments"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-2m"
+            },
+            {
+              "key": "link",
+              "value": "<https://api.github.com/repositories/1359560850/issues/1/comments?page=2&per_page=1>; rel=\"next\", <https://api.github.com/repositories/1359560850/issues/1/comments?page=5&per_page=1>; rel=\"last\""
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "1287"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:45:18 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"id\": 5564962248,\n    \"body\": \"this is not a good comment\",\n    \"user\": {\n      \"login\": \"isaackimmi\",\n      \"id\": 53633984,\n      \"node_id\": \"MDQ6VXNlcjUzNjMzOTg0\",\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/53633984?v=4\",\n      \"gravatar_id\": \"\",\n      \"url\": \"https://api.github.com/users/isaackimmi\",\n      \"html_url\": \"https://github.com/isaackimmi\",\n      \"followers_url\": \"https://api.github.com/users/isaackimmi/followers\",\n      \"following_url\": \"https://api.github.com/users/isaackimmi/following{/other_user}\",\n      \"gists_url\": \"https://api.github.com/users/isaackimmi/gists{/gist_id}\",\n      \"starred_url\": \"https://api.github.com/users/isaackimmi/starred{/owner}{/repo}\",\n      \"subscriptions_url\": \"https://api.github.com/users/isaackimmi/subscriptions\",\n      \"organizations_url\": \"https://api.github.com/users/isaackimmi/orgs\",\n      \"repos_url\": \"https://api.github.com/users/isaackimmi/repos\",\n      \"events_url\": \"https://api.github.com/users/isaackimmi/events{/privacy}\",\n      \"received_events_url\": \"https://api.github.com/users/isaackimmi/received_events\",\n      \"type\": \"User\",\n      \"user_view_type\": \"public\",\n      \"site_admin\": false\n    },\n    \"created_at\": \"2026-09-07T04:19:07Z\",\n    \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/1#issuecomment-5564962248\",\n    \"updated_at\": \"2026-09-07T04:19:07Z\",\n    \"url\": \"https://api.github.com/repos/isaackimmi/cmpe-272-assignment-2/issues/comments/5564962248\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "List webhook events",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{apiAuthToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "events"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Example Webhook Events",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/events?limit=50",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-27"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "443"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:39:24 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"id\": \"6c4095a0-aa7a-11f1-8852-d3349ea3b6a0\",\n    \"event\": \"issue_comment\",\n    \"action\": \"created\",\n    \"issue_number\": 3,\n    \"comment_id\": 5565341367,\n    \"timestamp\": \"2026-09-07T05:10:21.378Z\"\n  },\n  {\n    \"id\": \"093c0cea-aa76-11f1-86cc-dd13c59bdc15\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 3,\n    \"timestamp\": \"2026-09-07T04:38:57.148Z\"\n  },\n  {\n    \"id\": \"ca0dee9e-aa75-11f1-8f6b-d0674fd75bff\",\n    \"event\": \"ping\",\n    \"action\": \"ping\",\n    \"issue_number\": null,\n    \"timestamp\": \"2026-09-07T04:37:11.036Z\"\n  }\n]"
+        },
+        {
+          "name": "List Webhook Events (Idempotency)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/events?limit=50",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-2g"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "856"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:41:30 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"id\": \"af9980b0-aa7e-11f1-8c91-839f48e34214\",\n    \"event\": \"issues\",\n    \"action\": \"closed\",\n    \"issue_number\": 2,\n    \"timestamp\": \"2026-09-07T05:40:52.444Z\"\n  },\n  {\n    \"id\": \"a8750ac0-aa7e-11f1-87ad-a979d4f98a6f\",\n    \"event\": \"issues\",\n    \"action\": \"reopened\",\n    \"issue_number\": 1,\n    \"timestamp\": \"2026-09-07T05:40:40.194Z\"\n  },\n  {\n    \"id\": \"9cd8ef60-aa7e-11f1-9900-6fd2fb7b7ce4\",\n    \"event\": \"issues\",\n    \"action\": \"closed\",\n    \"issue_number\": 1,\n    \"timestamp\": \"2026-09-07T05:40:20.741Z\"\n  },\n  {\n    \"id\": \"6c4095a0-aa7a-11f1-8852-d3349ea3b6a0\",\n    \"event\": \"issue_comment\",\n    \"action\": \"created\",\n    \"issue_number\": 3,\n    \"comment_id\": 5565341367,\n    \"timestamp\": \"2026-09-07T05:10:21.378Z\"\n  },\n  {\n    \"id\": \"093c0cea-aa76-11f1-86cc-dd13c59bdc15\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 3,\n    \"timestamp\": \"2026-09-07T04:38:57.148Z\"\n  },\n  {\n    \"id\": \"ca0dee9e-aa75-11f1-8f6b-d0674fd75bff\",\n    \"event\": \"ping\",\n    \"action\": \"ping\",\n    \"issue_number\": null,\n    \"timestamp\": \"2026-09-07T04:37:11.036Z\"\n  }\n]"
+        },
+        {
+          "name": "List webhook events (synthetic event)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-3w"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "3866"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 06:06:48 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"id\": \"70f5578c-86c0-4630-9571-aec23fa5a6a6\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 10,\n    \"timestamp\": \"2026-09-07T06:06:42.566Z\"\n  },\n  {\n    \"id\": \"7ac26019-8242-44ec-9e33-6c0d0d03d40f\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 3,\n    \"timestamp\": \"2026-09-07T06:06:09.204Z\"\n  },\n  {\n    \"id\": \"abc3a8e7-1b27-4884-a861-5382090aa651\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 3,\n    \"timestamp\": \"2026-09-07T06:06:08.290Z\"\n  },\n  {\n    \"id\": \"414356a7-7609-4c0a-a144-43d1a4612841\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 3,\n    \"timestamp\": \"2026-09-07T06:04:06.013Z\"\n  },\n  {\n    \"id\": \"25aa7ff0-aa81-11f1-95da-967fcd8bc680\",\n    \"event\": \"issue_comment\",\n    \"action\": \"created\",\n    \"issue_number\": 1,\n    \"comment_id\": 5565749552,\n    \"timestamp\": \"2026-09-07T05:58:29.355Z\"\n  },\n  {\n    \"id\": \"29477240-aa80-11f1-95ef-b548b99eb309\",\n    \"event\": \"issues\",\n    \"action\": \"closed\",\n    \"issue_number\": 7,\n    \"timestamp\": \"2026-09-07T05:51:25.846Z\"\n  },\n  {\n    \"id\": \"27c9d2f0-aa80-11f1-8bc1-12b769a8074f\",\n    \"event\": \"issue_comment\",\n    \"action\": \"created\",\n    \"issue_number\": 7,\n    \"comment_id\": 5565694314,\n    \"timestamp\": \"2026-09-07T05:51:23.384Z\"\n  },\n  {\n    \"id\": \"273693a0-aa80-11f1-9c9a-bedc6c02acdb\",\n    \"event\": \"issues\",\n    \"action\": \"reopened\",\n    \"issue_number\": 7,\n    \"timestamp\": \"2026-09-07T05:51:22.407Z\"\n  },\n  {\n    \"id\": \"26c58250-aa80-11f1-8f1f-021cf7f335bf\",\n    \"event\": \"issues\",\n    \"action\": \"closed\",\n    \"issue_number\": 7,\n    \"timestamp\": \"2026-09-07T05:51:21.579Z\"\n  },\n  {\n    \"id\": \"268d8260-aa80-11f1-82c0-2dd497e8a356\",\n    \"event\": \"issues\",\n    \"action\": \"edited\",\n    \"issue_number\": 7,\n    \"timestamp\": \"2026-09-07T05:51:21.295Z\"\n  },\n  {\n    \"id\": \"26082d5e-aa80-11f1-8034-cc5900a1f6af\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 7,\n    \"timestamp\": \"2026-09-07T05:51:20.422Z\"\n  },\n  {\n    \"id\": \"fa720160-aa7f-11f1-90ab-272b3cf029fe\",\n    \"event\": \"issues\",\n    \"action\": \"closed\",\n    \"issue_number\": 6,\n    \"timestamp\": \"2026-09-07T05:50:07.505Z\"\n  },\n  {\n    \"id\": \"f9768a60-aa7f-11f1-92df-d5765621fb59\",\n    \"event\": \"issue_comment\",\n    \"action\": \"created\",\n    \"issue_number\": 6,\n    \"comment_id\": 5565684363,\n    \"timestamp\": \"2026-09-07T05:50:05.738Z\"\n  },\n  {\n    \"id\": \"f7923334-aa7f-11f1-8995-7b24544fcdf7\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 6,\n    \"timestamp\": \"2026-09-07T05:50:02.704Z\"\n  },\n  {\n    \"id\": \"e68dd7a0-aa7f-11f1-8534-b518c721ddc6\",\n    \"event\": \"issues\",\n    \"action\": \"closed\",\n    \"issue_number\": 5,\n    \"timestamp\": \"2026-09-07T05:49:33.977Z\"\n  },\n  {\n    \"id\": \"e6447290-aa7f-11f1-9f41-cd556fd50634\",\n    \"event\": \"issue_comment\",\n    \"action\": \"created\",\n    \"issue_number\": 5,\n    \"comment_id\": 5565680206,\n    \"timestamp\": \"2026-09-07T05:49:33.533Z\"\n  },\n  {\n    \"id\": \"e5034000-aa7f-11f1-99c1-609139d68c78\",\n    \"event\": \"issues\",\n    \"action\": \"reopened\",\n    \"issue_number\": 5,\n    \"timestamp\": \"2026-09-07T05:49:31.236Z\"\n  },\n  {\n    \"id\": \"e4dbbad0-aa7f-11f1-9b66-4b7937d65730\",\n    \"event\": \"issues\",\n    \"action\": \"edited\",\n    \"issue_number\": 5,\n    \"timestamp\": \"2026-09-07T05:49:31.032Z\"\n  },\n  {\n    \"id\": \"e498be60-aa7f-11f1-9940-fa3f2a09698b\",\n    \"event\": \"issues\",\n    \"action\": \"closed\",\n    \"issue_number\": 5,\n    \"timestamp\": \"2026-09-07T05:49:30.595Z\"\n  },\n  {\n    \"id\": \"e424c852-aa7f-11f1-9db2-203f3a176f6e\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 5,\n    \"timestamp\": \"2026-09-07T05:49:29.953Z\"\n  },\n  {\n    \"id\": \"a86af228-aa7f-11f1-9e48-18d62b0b9a7d\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 4,\n    \"timestamp\": \"2026-09-07T05:47:49.887Z\"\n  },\n  {\n    \"id\": \"af9980b0-aa7e-11f1-8c91-839f48e34214\",\n    \"event\": \"issues\",\n    \"action\": \"closed\",\n    \"issue_number\": 2,\n    \"timestamp\": \"2026-09-07T05:40:52.444Z\"\n  },\n  {\n    \"id\": \"a8750ac0-aa7e-11f1-87ad-a979d4f98a6f\",\n    \"event\": \"issues\",\n    \"action\": \"reopened\",\n    \"issue_number\": 1,\n    \"timestamp\": \"2026-09-07T05:40:40.194Z\"\n  },\n  {\n    \"id\": \"9cd8ef60-aa7e-11f1-9900-6fd2fb7b7ce4\",\n    \"event\": \"issues\",\n    \"action\": \"closed\",\n    \"issue_number\": 1,\n    \"timestamp\": \"2026-09-07T05:40:20.741Z\"\n  },\n  {\n    \"id\": \"6c4095a0-aa7a-11f1-8852-d3349ea3b6a0\",\n    \"event\": \"issue_comment\",\n    \"action\": \"created\",\n    \"issue_number\": 3,\n    \"comment_id\": 5565341367,\n    \"timestamp\": \"2026-09-07T05:10:21.378Z\"\n  },\n  {\n    \"id\": \"093c0cea-aa76-11f1-86cc-dd13c59bdc15\",\n    \"event\": \"issues\",\n    \"action\": \"opened\",\n    \"issue_number\": 3,\n    \"timestamp\": \"2026-09-07T04:38:57.148Z\"\n  },\n  {\n    \"id\": \"ca0dee9e-aa75-11f1-8f6b-d0674fd75bff\",\n    \"event\": \"ping\",\n    \"action\": \"ping\",\n    \"issue_number\": null,\n    \"timestamp\": \"2026-09-07T04:37:11.036Z\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Receive webhook",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ],
+            "packages": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const CryptoJS = pm.require('npm:crypto-js@4.2.0');\nconst secret = pm.environment.get('webhookSecret');\n\nif (!secret) {\n  throw new Error('Set webhookSecret in the active Postman environment');\n  }\n\n  const rawBody = pm.variables.replaceIn(pm.request.body.raw);\n  const digest = CryptoJS.HmacSHA256(rawBody, secret).toString(CryptoJS.enc.Hex);\n  pm.request.headers.upsert({\n  key: \"X-Hub-Signature-256\",\n  value: `sha256=${digest}`,\n});"
+            ],
+            "packages": {
+              "npm:crypto-js@4.2.0": {
+                "id": "npm:crypto-js@4.2.0"
+              }
+            }
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-GitHub-Event",
+            "value": " issues"
+          },
+          {
+            "key": "X-GitHub-Delivery",
+            "value": " {{$guid}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"action\": \"opened\",\n  \"repository\": {\n    \"full_name\": \"isaackimmi/cmpe-272-assignment-2\"\n  },\n  \"issue\": {\n    \"number\": 10\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/webhook",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "webhook"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Receive webhook",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-GitHub-Event",
+                "value": " issues"
+              },
+              {
+                "key": "X-GitHub-Delivery",
+                "value": " {{$guid}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"opened\",\n  \"repository\": {\n    \"full_name\": \"isaackimmi/cmpe-272-assignment-2\"\n  },\n  \"issue\": {\n    \"number\": 10\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhook",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhook"
+              ]
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "_postman_previewlanguage": "text",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-3v"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 06:06:42 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Update Issue",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{apiAuthToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Closed Issue 2\",\n    \"body\": \"hello\",\n    \"state\": \"closed\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/issues/{{issueNumber}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "issues",
+            "{{issueNumber}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Close Issue 2",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Closed Issue 2\",\n    \"body\": \"hello\",\n    \"state\": \"closed\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/issues/{{issueNumber}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "issues",
+                "{{issueNumber}}"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-request-id",
+              "value": "req-2h"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "227"
+            },
+            {
+              "key": "date",
+              "value": "Mon, 07 Sep 2026 05:43:35 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=72"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"number\": 2,\n  \"html_url\": \"https://github.com/isaackimmi/cmpe-272-assignment-2/issues/2\",\n  \"state\": \"closed\",\n  \"title\": \"Closed Issue 2\",\n  \"body\": \"hello\",\n  \"labels\": [],\n  \"created_at\": \"2026-09-07T04:11:46Z\",\n  \"updated_at\": \"2026-09-07T05:43:35Z\"\n}"
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{apiAuthToken}}",
+        "type": "string"
+      }
+    ]
+  }
+}
